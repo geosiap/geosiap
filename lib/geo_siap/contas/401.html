@@ -1,66 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Não autorizado (401)</title>
+  <title>Acesso negado. (401)</title>
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" media="all" href="http://designa.github.io/geo-framework/dist/css/geo-framework.min.css">
   <style>
-  body {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
-
-  div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
-
-  div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-
-  h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
-
-  div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    .geo-login {
+      background: url('http://designa.github.io/geo-framework/images/bg_contas_login.jpg') no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+    .geo-login h1 {
+      font-size: 1.5em;
+      font-weight: lighter;
+    }
   </style>
 </head>
 
 <body>
-  <div class="dialog">
-    <div>
-      <h1>Não autorizado</h1>
-      <p>Você não tem acesso ao modulo.</p>
+  <div class="geo-login">
+    <div class="geo-login__box">
+      <img alt="Logo GeoSiap" src="http://designa.github.io/geo-framework/images/logo_geosiap.png"><br>
+      <img src="http://designa.github.io/geo-framework/images/icons/icon_erro_401.svg">
+
+      <h1>
+        Você não tem acesso a este módulo do Geosiap.<br>
+        Entre em contato com o administrador deste módulo.
+      </h1>
     </div>
-    <p>Entre em contato com o administrador para solicitar um acesso.</p>
   </div>
 </body>
 </html>

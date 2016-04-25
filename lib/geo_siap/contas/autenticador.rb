@@ -13,6 +13,7 @@ module GeoSiap::Contas::Autenticador
   end
 
   class UsuarioNaoEncontrado < StandardError; end
+  class NaoEstaLogado < StandardError; end
 
 private
 
@@ -27,12 +28,17 @@ private
   end
 
   def contas_usuario
-    if Rails.env.development?
-      session[:login] = params[:login] if params[:login].present?
-      @contas_usuario = GeoSiap::Contas::Usuario.find_by_login(session[:login]) if session[:login].present?
-    end
-
+    try_development_login
     @contas_usuario ||= GeoSiap::Contas::Usuario.find_by_id(token_payload.try(:[], :id))
+  end
+
+  def try_development_login
+    if Rails.env.development? && params[:login].present?
+      cookies.delete("#{Rails.env}_token", domain: :all)
+      if _contas_usuario = GeoSiap::Contas::Usuario.find_by_login(params[:login])
+        cookies["#{Rails.env}_token"] = {value: GeoSiap::Contas::JWTToken.new.encode(_contas_usuario), domain: :all}
+      end
+    end
   end
 
   def logado?
@@ -43,6 +49,7 @@ private
     if logado?
       raise UsuarioNaoEncontrado.new('Usuário do módulo não encontrado.') if respond_to?(:usuario, true) && usuario.nil?
     else
+      raise NaoEstaLogado.new('Nenhum usuário logado.') if request.format.json?
       redirect_to contas_url.login_url
     end
   end

@@ -1,12 +1,9 @@
 $:.push File.expand_path('../lib', __FILE__)
 
-# Maintain your gem's version:
-require 'geo_siap/version'
-
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = 'geo_siap'
-  s.version     = GeoSiap::VERSION
+  s.version     = ''
   s.authors     = ['Fábio Rodrigues']
   s.email       = ['fabio.info@gmail.com']
   s.homepage    = 'http://geosiap.net/'

@@ -4,8 +4,6 @@ require 'search_cop'
 require 'jwt'
 
 module GeoSiap
-  require 'geo_siap/version'
-
   require 'geo_siap/assets'
   require 'geo_siap/assets/helpers'
   require 'geo_siap/assets/controller_extension'

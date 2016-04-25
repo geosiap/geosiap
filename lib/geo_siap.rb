@@ -1,7 +1,7 @@
 require 'refile'
 require 'refile/attachment/active_record'
 require 'search_cop'
-require 'redis-activesupport'
+require 'jwt'
 
 module GeoSiap
   require 'geo_siap/version'
@@ -15,5 +15,5 @@ module GeoSiap
   require 'geo_siap/contas/com_usuario'
   require 'geo_siap/contas/usuario'
   require 'geo_siap/contas/contas_url'
-  require 'geo_siap/contas/contas_session'
+  require 'geo_siap/contas/jwt_token'
 end

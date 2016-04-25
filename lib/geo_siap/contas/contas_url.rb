@@ -1,4 +1,4 @@
-class ContasUrl
+class GeoSiap::Contas::ContasUrl
 
   def initialize(context)
     @context = context

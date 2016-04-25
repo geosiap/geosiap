@@ -18,6 +18,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails', '~> 4.2.3'
   s.add_dependency 'refile'
   s.add_dependency 'search_cop'
-  s.add_dependency 'redis-activesupport'
-  s.add_dependency 'redis-namespace'
+  s.add_dependency 'jwt'
 end

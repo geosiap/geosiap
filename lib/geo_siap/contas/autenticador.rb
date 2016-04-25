@@ -16,12 +16,14 @@ module GeoSiap::Contas::Autenticador
 
 private
 
-  def contas_session
-    @contas_session ||= GeoSiap::Contas::ContasSession.new(self)
+  def token_payload
+    @token_payload ||= if token = cookies["#{Rails.env}_token"]
+      GeoSiap::Contas::JWTToken.new.decode(token)
+    end
   end
 
   def contas_url
-    @contas_url ||= ContasUrl.new(self)
+    @contas_url ||= GeoSiap::Contas::ContasUrl.new(self)
   end
 
   def contas_usuario
@@ -30,7 +32,7 @@ private
       @contas_usuario = GeoSiap::Contas::Usuario.find_by_login(session[:login]) if session[:login].present?
     end
 
-    @contas_usuario ||= GeoSiap::Contas::Usuario.find_by_id(contas_session.usuario_id)
+    @contas_usuario ||= GeoSiap::Contas::Usuario.find_by_id(token_payload.try(:[], :id))
   end
 
   def logado?

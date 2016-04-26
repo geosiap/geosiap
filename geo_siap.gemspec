@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
 
   s.files         = Dir['lib/**/*']
 
-  s.add_dependency 'rails', '~> 4.2.3'
+  s.add_dependency 'rails', '>= 4.1.0'
   s.add_dependency 'refile'
   s.add_dependency 'search_cop'
   s.add_dependency 'jwt'

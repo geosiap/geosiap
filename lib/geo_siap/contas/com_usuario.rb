@@ -4,7 +4,7 @@ module GeoSiap::Contas::ComUsuario
 
   included do
     belongs_to :contas_usuario, class_name: 'GeoSiap::Contas::Usuario'
-    delegate :email, :nome, :foto_id, to: :contas_usuario, allow_nil: true
+    delegate :email, :username, :nome, :foto_id, to: :contas_usuario, allow_nil: true
     scope :ordem_alfabetica, -> { includes(:contas_usuario).order('contas_usuarios.nome') }
   end
 

@@ -28,17 +28,7 @@ private
   end
 
   def contas_usuario
-    try_development_login
     @contas_usuario ||= GeoSiap::Contas::Usuario.find_by_id(token_payload.try(:[], :id))
-  end
-
-  def try_development_login
-    if Rails.env.development? && params[:login].present?
-      cookies.delete("#{Rails.env}_token", domain: :all)
-      if _contas_usuario = GeoSiap::Contas::Usuario.find_by_login(params[:login])
-        cookies["#{Rails.env}_token"] = {value: GeoSiap::Contas::JWTToken.new.encode(_contas_usuario), domain: :all}
-      end
-    end
   end
 
   def logado?
@@ -46,6 +36,9 @@ private
   end
 
   def autenticar!
+    try_development_login
+    validate_session
+
     if logado?
       raise UsuarioNaoEncontrado.new('Usuário do módulo não encontrado.') if respond_to?(:usuario, true) && usuario.nil?
     else
@@ -60,6 +53,22 @@ private
 
   def logout_url
     contas_url.logout_url
+  end
+
+  def try_development_login
+    if Rails.env.development? && params[:login].present?
+      cookies.delete("#{Rails.env}_token", domain: :all)
+      if _contas_usuario = GeoSiap::Contas::Usuario.find_by_login(params[:login])
+        cookies["#{Rails.env}_token"] = {value: GeoSiap::Contas::JWTToken.new.encode(_contas_usuario), domain: :all}
+      end
+    end
+  end
+
+  def validate_session
+    if session[:contas_usuario_id] && session[:contas_usuario_id] != contas_usuario.try(:id)
+      reset_session
+    end
+    session[:contas_usuario_id] = contas_usuario.id if logado?
   end
 
 end

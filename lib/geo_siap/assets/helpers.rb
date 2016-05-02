@@ -2,7 +2,7 @@ module GeoSiap::Assets::Helpers
 
   include ActionView::Helpers::AssetTagHelper
 
-  GEO_ASSETS_HOST = 'http://designa.github.io/geo-framework'
+  GEO_ASSETS_HOST = '//designa.github.io/geo-framework'
 
   def geo_stylesheet_link_tag
     stylesheet_link_tag "#{GEO_ASSETS_HOST}/dist/css/geo-framework.min.css", media: 'all'

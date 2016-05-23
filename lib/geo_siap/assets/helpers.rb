@@ -2,7 +2,7 @@ module GeoSiap::Assets::Helpers
 
   include ActionView::Helpers::AssetTagHelper
 
-  GEO_ASSETS_HOST = '//github.com/embras/geosiap-assets'
+  GEO_ASSETS_HOST = '//embras.github.io/geosiap-assets'
 
   def geo_stylesheet_link_tag
     stylesheet_link_tag "#{GEO_ASSETS_HOST}/dist/1.2/css/geo-framework.min.css", media: 'all'

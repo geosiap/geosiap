@@ -20,4 +20,9 @@ module GeoSiap::Assets::Helpers
     image_url("#{GEO_ASSETS_HOST}/images/#{name}", options)
   end
 
+  def sprite(id, classe=nil)
+    sprite = "#{GEO_ASSETS_HOST}/images/icons.svg##{id}"
+    "<svg class='#{classe}'><use xlink:href='#{image_url(sprite)}'/></svg>".html_safe
+  end
+
 end

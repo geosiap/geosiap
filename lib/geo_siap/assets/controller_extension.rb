@@ -5,7 +5,7 @@ module GeoSiap::Assets::ControllerExtension
   include GeoSiap::Assets::Helpers
 
   included do
-    helper_method :geo_stylesheet_link_tag, :geo_javascript_include_tag, :geo_image_tag
+    helper_method :geo_stylesheet_link_tag, :geo_javascript_include_tag, :geo_image_tag, :sprite
   end
 
 end

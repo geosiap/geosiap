@@ -1,4 +1,4 @@
-class GeoSiap::Contas::ContasUrl
+class Geosiap::Contas::ContasUrl
 
   def initialize(context)
     @context = context
@@ -23,6 +23,7 @@ private
   def base_url
     _base_url = context.request.base_url
     _base_url.gsub!(context.request.subdomain, base_subdomain) if context.request.subdomain.present?
+    _base_url.gsub!('com.br', 'geosiap.net')
     _base_url
   end
 

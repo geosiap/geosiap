@@ -1,4 +1,4 @@
-module GeoSiap::Contas::Autenticador
+module Geosiap::Contas::Autenticador
 
   extend ActiveSupport::Concern
 
@@ -19,16 +19,16 @@ private
 
   def token_payload
     @token_payload ||= if token = cookies["#{Rails.env}_token"]
-      GeoSiap::Contas::JWTToken.new.decode(token)
+      Geosiap::Contas::JWTToken.new.decode(token)
     end
   end
 
   def contas_url
-    @contas_url ||= GeoSiap::Contas::ContasUrl.new(self)
+    @contas_url ||= Geosiap::Contas::ContasUrl.new(self)
   end
 
   def contas_usuario
-    @contas_usuario ||= GeoSiap::Contas::Usuario.find_by_id(token_payload.try(:[], :id))
+    @contas_usuario ||= Geosiap::Contas::Usuario.find_by_id(token_payload.try(:[], :id))
   end
 
   def logado?
@@ -58,8 +58,8 @@ private
   def try_development_login
     if Rails.env.development? && params[:login].present?
       cookies.delete("#{Rails.env}_token", domain: :all)
-      if _contas_usuario = GeoSiap::Contas::Usuario.find_by_login(params[:login])
-        cookies["#{Rails.env}_token"] = {value: GeoSiap::Contas::JWTToken.new.encode(_contas_usuario), domain: :all}
+      if _contas_usuario = Geosiap::Contas::Usuario.find_by_login(params[:login])
+        cookies["#{Rails.env}_token"] = {value: Geosiap::Contas::JWTToken.new.encode(_contas_usuario), domain: :all}
       end
     end
   end

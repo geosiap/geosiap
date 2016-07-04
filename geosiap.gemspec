@@ -2,12 +2,12 @@ $:.push File.expand_path('../lib', __FILE__)
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = 'geo_siap'
+  s.name        = 'geosiap'
   s.version     = ''
   s.authors     = ['Fábio Rodrigues']
   s.email       = ['fabio.info@gmail.com']
   s.homepage    = 'http://geosiap.net/'
-  s.summary     = 'Funcionalidades comuns dos módulos GeoSiap.'
+  s.summary     = 'Funcionalidades comuns dos módulos Geosiap.'
   s.license     = 'MIT'
 
   s.files         = Dir['lib/**/*']

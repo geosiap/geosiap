@@ -1,4 +1,4 @@
-class GeoSiap::Contas::Usuario < ActiveRecord::Base
+class Geosiap::Contas::Usuario < ActiveRecord::Base
 
   include SearchCop
 

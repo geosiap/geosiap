@@ -1,4 +1,4 @@
-class GeoSiap::Contas::JWTToken
+class Geosiap::Contas::JWTToken
 
   def encode(user)
     JWT.encode(payload(user), rsa, 'RS256')

@@ -1,4 +1,4 @@
-module GeoSiap::Assets::Helpers
+module Geosiap::Assets::Helpers
 
   include ActionView::Helpers::AssetTagHelper
 

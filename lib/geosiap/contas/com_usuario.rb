@@ -1,9 +1,9 @@
-module GeoSiap::Contas::ComUsuario
+module Geosiap::Contas::ComUsuario
 
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :contas_usuario, class_name: 'GeoSiap::Contas::Usuario'
+    belongs_to :contas_usuario, class_name: 'Geosiap::Contas::Usuario'
     scope :ordem_alfabetica, -> { includes(:contas_usuario).order('contas_usuarios.nome') }
 
     delegate :email, :username, :nome, to: :contas_usuario, allow_nil: true

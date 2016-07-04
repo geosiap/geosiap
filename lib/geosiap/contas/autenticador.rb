@@ -57,9 +57,9 @@ private
 
   def try_development_login
     if Rails.env.development? && params[:login].present?
-      cookies.delete("#{Rails.env}_token", domain: Geosiap::Contas::DOMAINS)
+      cookies.delete("#{Rails.env}_token", domain: :all)
       if _contas_usuario = Geosiap::Contas::Usuario.find_by_login(params[:login])
-        cookies["#{Rails.env}_token"] = {value: Geosiap::Contas::JWTToken.new.encode(_contas_usuario), domain: Geosiap::Contas::DOMAINS}
+        cookies["#{Rails.env}_token"] = {value: Geosiap::Contas::JWTToken.new.encode(_contas_usuario), domain: :all}
       end
     end
   end

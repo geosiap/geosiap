@@ -13,13 +13,17 @@ private
   PATH = "#{ENV['HOME']}/.contas_rsa"
 
   def rsa
-    rsa_file = File.read("#{PATH}/#{Rails.env}")
-    @rsa ||= OpenSSL::PKey::RSA.new(rsa_file)
+    @rsa ||= begin
+      value = ENV['CONTAS_RSA'] || File.read("#{PATH}/#{Rails.env}")
+      OpenSSL::PKey::RSA.new(value)
+    end
   end
 
   def rsa_pub
-    rsa_pub_file = File.read("#{PATH}/#{Rails.env}.pub")
-    @rsa_pub ||= OpenSSL::PKey::RSA.new(rsa_pub_file)
+    @rsa_pub ||= begin
+      value = ENV['CONTAS_RSA_PUB'] || File.read("#{PATH}/#{Rails.env}.pub")
+      OpenSSL::PKey::RSA.new(value)
+    end
   end
 
   def payload(user)

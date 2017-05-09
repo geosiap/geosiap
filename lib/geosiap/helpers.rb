@@ -6,7 +6,7 @@ module Geosiap
     end
 
     def self.schemas(sigla)
-      Geosiap::Painel::Cliente.por_modulo(sigla).pluck(:nome_reduzido)
+      Geosiap::Painel::Cliente.por_modulo(sigla).order(:id).pluck(:nome_reduzido)
     end
 
   end

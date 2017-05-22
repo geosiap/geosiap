@@ -4,21 +4,31 @@
   <title>Acesso negado. (401)</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" media="all" href="//assets.geosiap.net/dist/1.2/css/geo-framework.min.css">
   <style>
-    .geo-login {
+    body {
+      font-family: "Open Sans","Helvetica", sans-serif;
+      margin: 0;
       background: url('//assets.geosiap.net/images/bg_contas_login.jpg') no-repeat center center fixed;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
       background-size: cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      aling-content: center;
+      text-align: center;
+      min-height: 100vh;
+      padding: 100px 0;
+      box-sizing: border-box;
     }
-    .geo-login h1 {
+    h1 {
       font-size: 1.5em;
       font-weight: bold;
-      margin-bottom: 30px;
+      color: #FFFFFF;
     }
-    .geo-login p {
+    p {
       color: #FFFFFF;
       font-size: 1.2em;
       font-weight: lighter;
@@ -27,14 +37,12 @@
 </head>
 
 <body>
-  <div class="geo-login">
-    <div class="geo-login__box">
-      <img alt="Logo Geosiap" src="//assets.geosiap.net/images/logo_geosiap.png"><br>
-      <img src="//assets.geosiap.net/images/icons/erro-401.svg">
+  <div>
+    <img alt="Logo Geosiap" src="//assets.geosiap.net/images/logo_geosiap.png"><br>
+    <img src="//assets.geosiap.net/images/icons/erro-401.svg">
 
-      <h1>Você não tem acesso a este módulo.</h1>
-      <p>Entre em contato com o administrador deste módulo.</p>
-    </div>
+    <h1>Você não tem acesso a este módulo.</h1>
+    <p>Entre em contato com o administrador deste módulo.</p>
   </div>
 </body>
 </html>

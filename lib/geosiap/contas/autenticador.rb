@@ -5,7 +5,7 @@ module Geosiap::Contas::Autenticador
   included do
     before_filter :autenticar!
 
-    helper_method :contas_usuario, :logado?, :edit_registration_url, :logout_url
+    helper_method :contas_usuario, :logado?, :embras_ou_gestor?, :edit_registration_url, :logout_url
 
     rescue_from UsuarioNaoTemAcesso do
       render file: "#{File.dirname(__FILE__)}/401", formats: [:html], status: 401, layout: false
@@ -41,7 +41,7 @@ private
   end
 
   def licenca
-    @licenca ||= Geosiap::Painel::Licenca.where(cliente_id: cliente.id, modulo_id: modulo.id).take
+    @licenca ||= Geosiap::Acessos::Licenca.where(cliente_id: cliente.id, modulo_id: modulo.id).take
   end
 
   def tem_licenca?
@@ -52,10 +52,16 @@ private
     licenca.expirou?
   end
 
-  def usuario_tem_acesso?
-    return true if contas_usuario.embras?
+  def usuario_perfil
+    @usuario_perfil ||= Geosiap::Acessos::UsuarioPerfil.where(cliente_id: cliente.id, usuario_id: contas_usuario.id).take
+  end
 
-    usuario_perfil = Geosiap::Painel::UsuarioPerfil.where(cliente_id: cliente.id, usuario_id: contas_usuario.id).take
+  def embras_ou_gestor?
+    contas_usuario.embras? || usuario_perfil.try(:perfil).try(:gestor?)
+  end
+
+  def usuario_tem_acesso?
+    return true if embras_ou_gestor?
     usuario_perfil.present? && usuario_perfil.modulos.exists?(modulo.id)
   end
 

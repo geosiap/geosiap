@@ -1,6 +1,6 @@
-class Geosiap::Painel::Licenca < ActiveRecord::Base
+class Geosiap::Acessos::Licenca < ActiveRecord::Base
 
-  self.table_name_prefix = 'painel_'
+  self.table_name_prefix = 'acessos_'
 
   belongs_to :cliente
   belongs_to :modulo

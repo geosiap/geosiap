@@ -15,11 +15,12 @@ module Geosiap
   require 'geosiap/contas/contas_url'
   require 'geosiap/contas/jwt_token'
 
-  require 'geosiap/painel'
-  require 'geosiap/painel/cliente'
-  require 'geosiap/painel/licenca'
-  require 'geosiap/painel/modulo'
-  require 'geosiap/painel/usuario_perfil'
+  require 'geosiap/acessos'
+  require 'geosiap/acessos/cliente'
+  require 'geosiap/acessos/licenca'
+  require 'geosiap/acessos/modulo'
+  require 'geosiap/acessos/usuario_perfil'
+  require 'geosiap/acessos/perfil'
 
   require 'geosiap/helpers'
 end

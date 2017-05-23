@@ -5,7 +5,7 @@ module Geosiap::Contas::Autenticador
   included do
     before_filter :autenticar!
 
-    helper_method :contas_usuario, :logado?, :embras_ou_gestor?, :edit_registration_url, :logout_url
+    helper_method :contas_usuario, :logado?, :pode_gerenciar_permissao?, :edit_registration_url, :logout_url
 
     rescue_from UsuarioNaoTemAcesso do
       render file: "#{File.dirname(__FILE__)}/401", formats: [:html], status: 401, layout: false
@@ -56,12 +56,18 @@ private
     @usuario_perfil ||= Geosiap::Acessos::UsuarioPerfil.where(cliente_id: cliente.id, usuario_id: contas_usuario.id).take
   end
 
-  def embras_ou_gestor?
-    contas_usuario.embras? || usuario_perfil.try(:perfil).try(:gestor?)
+  def pode_gerenciar_permissao?
+    return true if contas_usuario.embras?
+
+    if usuario_perfil.present?
+      usuario_perfil.perfil.gestor? || (usuario_perfil.perfil.supervisor? && usuario_perfil.modulos.exists?(modulo.id))
+    else
+      false
+    end
   end
 
   def usuario_tem_acesso?
-    return true if embras_ou_gestor?
+    return true if contas_usuario.embras? || usuario_perfil.try(:perfil).try(:gestor?)
     usuario_perfil.present? && usuario_perfil.modulos.exists?(modulo.id)
   end
 

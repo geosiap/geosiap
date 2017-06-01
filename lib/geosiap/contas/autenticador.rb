@@ -3,7 +3,7 @@ module Geosiap::Contas::Autenticador
   extend ActiveSupport::Concern
 
   included do
-    before_filter :autenticar!
+    prepend_before_filter :autenticar!
 
     helper_method :contas_usuario, :logado?, :edit_registration_url, :logout_url
   end
@@ -18,8 +18,11 @@ private
     end
   end
 
-  def contas_url
-    @contas_url ||= Geosiap::Contas::ContasUrl.new(self)
+  def cliente
+  end
+
+  def obj_contas_url
+    @obj_contas_url ||= Geosiap::Contas::ContasUrl.new(self)
   end
 
   def contas_usuario
@@ -40,16 +43,16 @@ private
       raise Geosiap::Acessos::ControllerExtension::UsuarioNaoTemAcesso.new('Usuário não tem acesso ao módulo.') if !usuario_tem_acesso?
     else
       raise NaoEstaLogado.new('Nenhum usuário logado.') if request.format.json?
-      redirect_to contas_url.login_url
+      redirect_to obj_contas_url.login_url
     end
   end
 
   def edit_registration_url
-    contas_url.edit_registration_url
+    obj_contas_url.edit_registration_url
   end
 
   def logout_url
-    contas_url.logout_url
+    obj_contas_url.logout_url
   end
 
   def try_development_login

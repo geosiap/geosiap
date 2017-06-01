@@ -24,5 +24,10 @@ module Geosiap
   require 'geosiap/contas/contas_url'
   require 'geosiap/contas/jwt_token'
 
+  require 'geosiap/modulos'
+  require 'geosiap/modulos/url'
+  require 'geosiap/modulos/lista'
+  require 'geosiap/modulos/controller_extension'
+
   require 'geosiap/helpers'
 end

@@ -14,7 +14,7 @@ class Geosiap::Modulos::Lista
   end
 
   def acessos_url
-    url.for('acessos') if contas_usuario.embras? || usuario_perfil.try(:gestor?) || usuario_perfil.try(:supervisor?)
+    url.for('acessos') if embras? || gestor? || supervisor?
   end
 
   def com_acesso
@@ -44,7 +44,7 @@ private
   def modulos_com_acesso
     if cliente.nil?
       []
-    elsif contas_usuario.embras? || usuario_perfil.try(:gestor?)
+    elsif embras? || gestor?
       cliente.modulos.order(:nome)
     else
       usuario_perfil.modulos.order(:nome)
@@ -52,7 +52,7 @@ private
   end
 
   def modulos_sem_acesso
-    if cliente.nil? || contas_usuario.embras? || usuario_perfil.try(:gestor?)
+    if cliente.nil? || embras? || gestor?
       []
     else
       cliente.modulos.where.not(id: modulos_com_acesso.pluck(:id)).order(:nome)
@@ -70,6 +70,18 @@ private
 
   def info_sem_acesso(modulo)
     {nome: modulo.nome, sigla: modulo.sigla, url: "#{url.for(modulo.url)}/#{cliente.nome_reduzido}"}
+  end
+
+  def embras?
+    contas_usuario.embras?
+  end
+
+  def gestor?
+    usuario_perfil.try(:perfil).try(:gestor?)
+  end
+
+  def supervisor?
+    usuario_perfil.try(:perfil).try(:supervisor?)
   end
 
 end

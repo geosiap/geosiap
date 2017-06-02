@@ -65,7 +65,7 @@ private
   end
 
   def info_com_acesso(modulo)
-    {nome: modulo.nome, sigla: modulo.sigla, url: "#{url.for(modulo.url)}/#{cliente.nome_reduzido}", ativo: (modulo == context.send(:try, :modulo))}
+    {nome: modulo.nome, sigla: modulo.sigla, url: "#{url.for(modulo.url)}/#{cliente.nome_reduzido}", ativo: (context.respond_to?(:modulo, true) && context.send(:modulo) == modulo)}
   end
 
   def info_sem_acesso(modulo)

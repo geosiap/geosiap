@@ -9,6 +9,9 @@ module Geosiap::Modulos::ControllerExtension
 
 private
 
+  def cliente
+  end
+
   def atualizar_cliente
     return if contas_usuario.nil?
 
@@ -19,8 +22,8 @@ private
     end
   end
 
-  def alterar_cliente(novo_cliente)
-    cookies["#{Rails.env}_cliente_id"] = {value: novo_cliente.id, domain: :all}
+  def alterar_cliente(novo_cliente_id)
+    cookies["#{Rails.env}_cliente_id"] = {value: novo_cliente_id, domain: :all}
   end
 
   def cliente_selecionado

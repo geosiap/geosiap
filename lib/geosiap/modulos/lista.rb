@@ -42,7 +42,9 @@ private
   end
 
   def modulos_com_acesso
-    if contas_usuario.embras? || usuario_perfil.try(:gestor?)
+    if cliente.nil?
+      []
+    elsif contas_usuario.embras? || usuario_perfil.try(:gestor?)
       cliente.modulos.order(:nome)
     else
       usuario_perfil.modulos.order(:nome)
@@ -50,7 +52,7 @@ private
   end
 
   def modulos_sem_acesso
-    if contas_usuario.embras? || usuario_perfil.try(:gestor?)
+    if cliente.nil? || contas_usuario.embras? || usuario_perfil.try(:gestor?)
       []
     else
       cliente.modulos.where.not(id: modulos_com_acesso.pluck(:id)).order(:nome)

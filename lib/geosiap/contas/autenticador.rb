@@ -18,9 +18,6 @@ private
     end
   end
 
-  def cliente
-  end
-
   def obj_contas_url
     @obj_contas_url ||= Geosiap::Contas::ContasUrl.new(self)
   end

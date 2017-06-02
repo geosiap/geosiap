@@ -16,9 +16,9 @@ private
     return if contas_usuario.nil?
 
     if cliente.present? && cliente.id.to_s != cliente_cookie
-      alterar_cliente(cliente)
+      alterar_cliente(cliente.id)
     elsif cliente_cookie.nil? && unico_cliente?
-      alterar_cliente(clientes_disponiveis.first)
+      alterar_cliente(clientes_disponiveis.first.id)
     end
   end
 

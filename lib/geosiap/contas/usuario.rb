@@ -11,7 +11,7 @@ class Geosiap::Contas::Usuario < ActiveRecord::Base
   end
 
   def contas_foto_url
-    foto_url.try(:concat, '?prefix=contas')
+    Geosiap::Contas::S3.new.open(foto_id).url
   end
 
   search_scope :search do

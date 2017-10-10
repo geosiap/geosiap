@@ -18,6 +18,7 @@ module Geosiap
 
 
   require 'geosiap/contas'
+  require 'geosiap/contas/s3'
   require 'geosiap/contas/autenticador'
   require 'geosiap/contas/com_usuario'
   require 'geosiap/contas/usuario'

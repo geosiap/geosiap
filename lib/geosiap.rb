@@ -1,5 +1,3 @@
-require 'refile'
-require 'refile/attachment/active_record'
 require 'search_cop'
 require 'jwt'
 

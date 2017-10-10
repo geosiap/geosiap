@@ -14,7 +14,7 @@ module Geosiap::Contas::ComUsuario
     if defined?(super)
       super
     else
-      contas_usuario.contas_foto_url
+      contas_usuario.foto_url
     end
   end
 

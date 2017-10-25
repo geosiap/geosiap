@@ -27,7 +27,7 @@ private
   end
 
   def payload(user)
-    {id: user.id, email: user.email, username: user.username, nome: user.nome, foto_url: user.contas_foto_url}
+    {id: user.id, email: user.email, username: user.username, nome: user.nome, foto_url: user.foto_url}
   end
 
 end

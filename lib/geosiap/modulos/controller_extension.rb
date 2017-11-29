@@ -13,9 +13,9 @@ private
   end
 
   def atualizar_cliente
-    return if contas_usuario.nil?
-
-    if cliente.present? && cliente.id.to_s != cliente_cookie
+    if contas_usuario.nil?
+      cookies.delete("#{Rails.env}_cliente_id", domain: :all)
+    elsif cliente.present? && cliente.id.to_s != cliente_cookie
       alterar_cliente(cliente.id)
     elsif unico_cliente?
       alterar_cliente(clientes_disponiveis.first.id)

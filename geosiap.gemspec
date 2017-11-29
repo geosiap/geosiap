@@ -15,4 +15,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails', '>= 4.1.0'
   s.add_dependency 'search_cop'
   s.add_dependency 'jwt'
+  s.add_dependency 'aws-sdk', '2.10.91'
 end

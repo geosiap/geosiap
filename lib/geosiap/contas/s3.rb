@@ -3,12 +3,12 @@ class Geosiap::Contas::S3
   attr_reader :id, :url
 
   def initialize
-    s3 = AWS::S3.new({
-      access_key_id: ENV['S3_ACCESS_KEY_ID'],
-      secret_access_key: ENV['S3_SECRET_ACCESS_KEY'],
+    Aws.config.update({
+      region: ENV['S3_REGION'],
+      credentials: Aws::Credentials.new(ENV['S3_ACCESS_KEY_ID'], ENV['S3_SECRET_ACCESS_KEY'])
     })
 
-    @bucket = s3.buckets[ENV['S3_BUCKET']]
+    @bucket = Aws::S3::Resource.new.bucket(ENV['S3_BUCKET'])
   end
 
   def open(id)
@@ -20,9 +20,9 @@ private
   attr_reader :bucket, :object
 
   def open_from_path(path)
-    @object = bucket.objects[path]
+    @object = bucket.object(path)
     @id = object.key.split('/').last
-    @url = object.url_for(:get).to_s
+    @url = object.presigned_url(:get)
     self
   end
 

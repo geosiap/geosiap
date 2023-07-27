@@ -1,0 +1,42 @@
+FROM ruby:2.5.7
+LABEL maintainer "Webmaster Embras <webmaster AT embras DOT net>"
+
+RUN apt-get update -qq && \
+  apt-get install -y libpq-dev \
+  nodejs \
+  build-essential \
+  locales \
+  libssl-dev \
+  libcurl4-openssl-dev \
+  postgresql-client \
+  curl
+
+# RUN echo "America/Sao_Paulo" > /etc/timezone
+# RUN dpkg-reconfigure -f noninteractive tzdata
+
+ENV LANG C.UTF-8
+ENV RAILS_ENV development
+
+WORKDIR /app
+# COPY ./application/* /app/
+COPY ./application/Gemfile /app/Gemfile
+RUN bundle install
+
+# COPY ./application/ ./
+COPY ./application/* /app
+# Add a script to be executed every time the container starts.
+COPY ./files2docker/entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+EXPOSE 3000
+
+# Path to install gems
+# ENV BUNDLE_PATH=/gems \ 
+#   BUNDLE_BIN=/gems/bin \
+#   GEM_HOME=/gems
+# ENV PATH="${BUNDLE_BIN}:${PATH}"
+
+# # Start the main process.
+# CMD bundle exec rails s -p 3000 -b 0.0.0.0
+
+CMD ["bundle", "exec", "rdebug-ide", "--host", "0.0.0.0", "--port", "1234", "--skip_wait_for_start", "--", "bin/rails", "server", "-b", "0.0.0.0"]
